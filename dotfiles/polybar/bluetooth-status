@@ -1,0 +1,7 @@
+#!/bin/bash
+if bluetooth-power --on 2>/dev/null && [ -n "$(bluetooth-list 2>/dev/null | head -1)" ]; then
+    device=$(bluetooth-list 2>/dev/null | head -1 | awk '{print $2}')
+    echo "󰂰 $device"
+else
+    echo "󰂰"
+fi
