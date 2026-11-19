@@ -7,7 +7,7 @@ red = #f38ba8
 green = #a6e3a1
 
 [bar/main]
-monitor = ${env:MONITOR}
+monitor = ${env:MONITOR:}
 width = 100%
 height = 24
 offset-y = 0
@@ -27,13 +27,14 @@ separator = "  "
 
 [module/i3]
 type = internal/i3
+pin-workspaces = true
 format = <label-state>
-label-focused = %icon% %name%
+label-focused = %name%
 label-focused-foreground = ${colors.primary}
 label-focused-underline = ${colors.primary}
-label-unfocused = %icon% %name%
+label-unfocused = %name%
 label-unfocused-foreground = ${colors.foreground-alt}
-label-urgent = %icon% %name%
+label-urgent = %name%
 label-urgent-foreground = ${colors.red}
 
 [module/date]
@@ -46,7 +47,7 @@ label-foreground = ${colors.foreground}
 
 [module/network]
 type = internal/network
-interface = wlan0
+interface-type = wireless
 interval = 3
 label-connected = %{F#74c7ec}󰤨%{F-} %local_ip%
 label-disconnected = %{F#f38ba8}󰤯%{F-} offline
@@ -54,22 +55,12 @@ label-disconnected-foreground = ${colors.red}
 
 [module/bluetooth]
 type = custom/script
-exec = bluetooth-status
+exec = ~/.config/polybar/bluetooth-status
 interval = 10
 label = %output%
 format-foreground = ${colors.foreground}
 
 [module/mediaplayer]
-type = internal/mpd
-host = 127.0.0.1
-port = 6600
-format-online = %{F#f9e2af}󰎮%{F-} %title%
-format-online-foreground = ${colors.foreground}
-format-offline =
-label-offline =   
-
-[module/mediaplayer]
 type = custom/script
-exec = mpv --idle=yes --input-ipc-server=/tmp/mpvsocket get mediaplayback --format 2>/dev/null || echo "No playback"
+exec = playerctl metadata --format '%{F#f9e2af}󰎆%{F-} {{ artist }} - {{ title }}' 2>/dev/null
 interval = 3
-label = %{F#f9e2af}󰎮%{F-} %output%   

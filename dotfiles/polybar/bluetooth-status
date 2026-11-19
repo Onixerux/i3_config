@@ -1,7 +1,11 @@
 #!/bin/bash
-if bluetooth-power --on 2>/dev/null && [ -n "$(bluetooth-list 2>/dev/null | head -1)" ]; then
-    device=$(bluetooth-list 2>/dev/null | head -1 | awk '{print $2}')
-    echo "󰂰 $device"
+if bluetoothctl show 2>/dev/null | grep -q "Powered: yes"; then
+    device=$(bluetoothctl devices Connected 2>/dev/null | head -1 | cut -d' ' -f3-)
+    if [ -n "$device" ]; then
+        echo "󰂱 $device"
+    else
+        echo "󰂯"
+    fi
 else
-    echo "󰂰"
+    echo "󰂲"
 fi

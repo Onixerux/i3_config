@@ -1,14 +1,13 @@
 #!/bin/bash
-set -e
+# Layout: links fastfetch, rechts oben + rechts unten je ein Terminal
+i3-msg "workspace number 1" >/dev/null
 
-alacritty -e fastfetch &
+alacritty --hold -e fastfetch &
 sleep 1
 
-i3-msg "split horizontal"
-i3-msg "focus right"
+i3-msg "split horizontal" >/dev/null
 alacritty &
 sleep 1
 
-i3-msg "split vertical"
-i3-msg "focus bottom"
+i3-msg "split vertical" >/dev/null
 alacritty &
