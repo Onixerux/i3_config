@@ -135,4 +135,4 @@ bindsym $mod+r mode "resize"
 exec --no-startup-id ~/.config/polybar/launch.sh
 
 # --- Workspace 1 Layout ---
-exec --no-startup-id ~/.config/i3/setup-layout.sh   
+exec --no-startup-id ~/.config/i3/setup-layout.sh
